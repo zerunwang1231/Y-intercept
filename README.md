@@ -25,13 +25,13 @@ main function
   
 ### Other files:
 
-#### 1332JT.png: 
+#### ./res/1332JT.png: 
 saved grapgh of the visulization of buy-sell signals of stock 1332 JT
 
-#### log_book1332JT.csv: 
+#### ./res/log_book1332JT.csv: 
 log book of positions. P&L of 1332 JT
 
-#### P_and_L.txt: 
+#### ./res/P_and_L.txt: 
 final profits and loss of all avaliable stocks based on our strategy.
 
 
