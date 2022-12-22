@@ -8,7 +8,6 @@ This porject contains a trading startegy based on bollinger bands and volume osc
 
 ### .py files:
 
-
 #### main.py: 
 main function 
 
