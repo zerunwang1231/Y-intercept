@@ -10,9 +10,7 @@ import numpy as np
 # if output is positive, ie, fast volume average is larger than the slow one, then it signals a strong trend
 # otherwise, it signals a weak trend
 # set fast period to be 5 days, long period to be 20 days
-def vo(vol):
-    short_period = 5
-    long_period = 20
+def vo(vol, short_period, long_period):
     short_vol = []
     long_vol = []
     for i in range(long_period-1, len(vol)):
@@ -23,8 +21,7 @@ def vo(vol):
     return np.arr(short_vol-long_vol)
 
 # Bollinger Band; set the time period to be 20 days
-def bb(price):
-    window_size = 20
+def bb(price, window_size):
     m = 2 # set scale to be 2
     ma = []
     sd = []
@@ -34,5 +31,18 @@ def bb(price):
         sd.append(statistics.stdev(window))
     # upper line
     bolu = np.arr(ma)+m*np.arr(sd)
+    # bottom line
     bold = np.arr(ma)-m*np.arr(sd)
     return bolu, bold
+
+def signal(vo, bolu, bold, price, window): # we assume vo, bolu, bold have the same length
+    price = price[window-1:]
+    indicator = [0]*len(vo)  # 1 means buy, -1 means sell, 0 means do nothing. Short sell is allowed
+    for i in range(len(vo)):
+        if price[i] >= bolu:
+            if vo[i] < 0:
+                indicator[i] = -1
+        elif price[i] <= bold:
+            if vo[i] > 0:
+                indicator[i] = 1
+    return indicator
