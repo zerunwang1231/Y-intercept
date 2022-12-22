@@ -61,4 +61,5 @@ def get_plot(date, price, volume, action, window):
 
     plot_vol = axes[1]
     plot_vol.bar(date, volume, width=2, color="darkgrey")
-    plt.show()
+    fig.savefig("./res/1332.png")
+

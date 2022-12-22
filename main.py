@@ -32,12 +32,18 @@ def main():
                 ),
                 axis=1,
             )
-            np.savetxt("log_book32JT.csv", log,fmt="%s", delimiter=",", header="date, position, P and L")
+            np.savetxt(
+                "./res/log_book1332JT.csv",
+                log,
+                fmt="%s",
+                delimiter=",",
+                header="date, position, P and L",
+            )
 
             # plot the time series plot for prices to indicate our transaction
             action = output["action"]  # entry and exit signals for stock 1332 JT
             testing.get_plot(date, price, volume, action, window)
-    with open("P_and_L.txt", "a", newline="", encoding="utf-8") as f:
+    with open("./res/P_and_L.txt", "a", newline="", encoding="utf-8") as f:
         for key in pl.keys():
             f.write("%s,%s\n" % (key, pl[key]))
 
