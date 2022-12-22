@@ -1,4 +1,4 @@
-import utils
+from tools import utils
 def excution_PL(price, volume, date, transaction_size):
     window = 20
     position_log = []
@@ -8,7 +8,7 @@ def excution_PL(price, volume, date, transaction_size):
     bolu, bold = utils.bb(price, window)
     indicator = utils.signal(vo, bolu, bold, price, window)
     price = price[window - 1:]
-    date = date[price[window - 1:]]
+    date = date[window - 1:]
     last_position = 0
     last_PL = 0
     for i, act in enumerate(indicator):

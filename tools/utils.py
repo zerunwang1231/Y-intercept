@@ -18,7 +18,7 @@ def vo(vol, short_period, long_period):
         window_long = vol[(i-(long_period-1)):(i+1)]
         short_vol.append(sum(window_short)/short_period)
         long_vol.append(sum(window_long) / long_period)
-    return np.arr(short_vol-long_vol)
+    return list(np.array(short_vol)-np.array(long_vol))
 
 # Bollinger Band; set the time period to be 20 days
 def bb(price, window_size):
@@ -30,19 +30,19 @@ def bb(price, window_size):
         ma.append((sum(window) / window_size))
         sd.append(statistics.stdev(window))
     # upper line
-    bolu = np.arr(ma)+m*np.arr(sd)
+    bolu = np.array(ma)+m*np.array(sd)
     # bottom line
-    bold = np.arr(ma)-m*np.arr(sd)
-    return bolu, bold
+    bold = np.array(ma)-m*np.array(sd)
+    return list(bolu), list(bold)
 
 def signal(vo, bolu, bold, price, window): # we assume vo, bolu, bold have the same length
     price = price[window-1:]
     indicator = [0]*len(vo)  # 1 means buy, -1 means sell, 0 means do nothing. Short sell is allowed
     for i in range(len(vo)):
-        if price[i] >= bolu:
+        if price[i] >= bolu[i]:
             if vo[i] < 0:
                 indicator[i] = -1
-        elif price[i] <= bold:
+        elif price[i] <= bold[i]:
             if vo[i] > 0:
                 indicator[i] = 1
     return indicator
